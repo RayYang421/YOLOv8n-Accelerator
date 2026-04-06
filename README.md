@@ -2,18 +2,18 @@
 
 
 ## Quick 
-```
-    git clone https://github.com/RayYang421/YOLOv8n-Accelerator
+```bash
+git clone https://github.com/RayYang421/YOLOv8n-Accelerator
 ```
 
 ### Environmrnt
 Set up the required dependencies using the provided Conda environment file:
-```
-    # Create the conda environment
-    conda env create -f environment.yml
+```bash
+# Create the conda environment
+conda env create -f environment.yml
 
-    # Activate the environment
-    conda activate AOC
+# Activate the environment
+conda activate AOC
 ```
 
 
