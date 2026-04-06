@@ -1,0 +1,39 @@
+name: AOC
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  # Python
+  - python=3.10
+  - pip
+
+  # PyTorch stack (recommended via conda to avoid pip +cuXXX wheel issues)
+  # If your driver supports CUDA 11.8 (most modern servers do), this is a safe default.
+  - pytorch>=2.0
+  - torchvision>=0.15
+  - torchaudio>=2.0
+  - pytorch-cuda=11.8
+
+  # (Optional but commonly useful)
+  - git
+  - ffmpeg
+
+  # Install Ultralytics runtime deps from pip (match pyproject.toml required dependencies)
+  - pip:
+      - numpy>=1.23.0
+      - matplotlib>=3.3.0
+      - opencv-python>=4.6.0
+      - pillow>=7.1.2
+      - pyyaml>=5.3.1
+      - requests>=2.23.0
+      - scipy>=1.4.1
+      - psutil>=5.8.0
+      - polars>=0.20.0
+      - ultralytics-thop>=2.0.18
+
+      # If you are installing Ultralytics from PyPI:
+      - ultralytics
+
+      # If you are using your own local repo, comment out ultralytics above
+      # then do: pip install -e .
