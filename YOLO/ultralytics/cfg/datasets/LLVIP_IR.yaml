@@ -1,0 +1,12 @@
+
+
+train: /storage/share/LLVIP/infrared/train/images/ # 128 images
+val: /storage/share/LLVIP/infrared/test/images/ # 128 images
+
+# number of classes
+nc: 1
+# class names
+names: [ 'people']
+
+
+
