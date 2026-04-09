@@ -8,7 +8,7 @@ from assembler import text_to_hex_full
 
 def main():
     # 1. Load the ONNX model
-    model_path = "/home/master_114/q36141252/AI-on-Chip/Model/best.onnx"
+    model_path = "../Model/train/weights/best.onnx"
     onnx_model = onnx.load(model_path)
     mod, params = relay.frontend.from_onnx(onnx_model, {"images": (1, 3, 640, 640)})
     
@@ -29,20 +29,20 @@ def main():
     emitter.instructions.append("OP:HALT   | IN:0x00000000 | WGT:0x00000000 | OUT:0x00000000 | FLAGS:0x0 | STRIDE:0 | PAD:0 | KERNEL:0")
     
     # 4. Write intermediate instructions and assemble to hex
-    with open("full_instructions.txt", "w") as f:
+    with open("../Build/full_instructions.txt", "w") as f:
         for cmd in emitter.instructions: 
             f.write(cmd + "\n")
             
-    text_to_hex_full("full_instructions.txt", "npu_program.hex")
+    text_to_hex_full("../Build/full_instructions.txt", "../Build/npu_program.hex")
     
     # 5. Export quantized weights
     final_weight_bytes = emitter.weight_memory[:emitter.max_weight_offset]
-    with open("weights.bin", "wb") as f:
+    with open("../Build/weights.bin", "wb") as f:
         f.write(final_weight_bytes)
 
     # 6. Generate CPU fallback runtime for unsupported operations
     print("Generating CPU runtime drivers (cpu_runtime.py)...")
-    with open("cpu_runtime.py", "w", encoding="utf-8") as f:
+    with open("../Build/cpu_runtime.py", "w", encoding="utf-8") as f:
         f.write("import numpy as np\n\n")
         for op in sorted(emitter.cpu_op_names):
             f.write(f"def cpu_execute_{op.replace('.','_')}(sram, in_addr, out_addr, h, w, c):\n")
