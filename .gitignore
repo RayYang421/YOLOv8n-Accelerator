@@ -1,0 +1,9 @@
+
+
+# Build output directory
+/Build/
+
+# YOLO Model Weight
+*.pt
+*.pth
+*.onnx
